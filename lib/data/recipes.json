@@ -1,9 +1,9 @@
 [
-  {"type": 1, "name": "Pallet Jack", "description": "Brown Ale"},
-  {"type": 2, "name": "Grapefruit & Chill", "description": "Grapefruit Cider"},
-  {"type": 2, "name": "Bad Apple", "description": "Imperial Cider"},
-  {"type": 3, "name": "Short Mead", "description": "Just Mead"},
-  {"type": 3, "name": "Viking's Blood", "description": "Cherry Mead"},
-  {"type": 3, "name": "Strawberry Pepper", "description": "Weird Mead"},
-  {"type": 4, "name": "Prison Hooch", "description": "Sangria fr'm th' Terlit"}
+  {"type": 0, "name": "Pallet Jack", "description": "Brown Ale"},
+  {"type": 1, "name": "Grapefruit & Chill", "description": "Grapefruit Cider"},
+  {"type": 1, "name": "Bad Apple", "description": "Imperial Cider"},
+  {"type": 2, "name": "Short Mead", "description": "Just Mead"},
+  {"type": 2, "name": "Viking's Blood", "description": "Cherry Mead"},
+  {"type": 2, "name": "Strawberry Pepper", "description": "Weird Mead"},
+  {"type": 3, "name": "Prison Hooch", "description": "Sangria fr'm th' Terlit"}
 ]
