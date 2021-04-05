@@ -1,43 +1,59 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
-class RecipeStorage {
-  Future<String> get _localPath async {
-    final directory = await getApplicationSupportDirectory();
+// class RecipeStorage {
+//   Future<String> get _localPath async {
+//     final directory = await getApplicationSupportDirectory();
 
-    return directory.path;
-  }
+//     return directory.path;
+//   }
 
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/recipes.txt');
-  }
+//   Future<File> get _localFile async {
+//     final path = await _localPath;
+//     return File('$path/recipes.txt');
+//   }
 
-  Future<String> readRecipes() async {
-    try {
-      final file = await _localFile;
-      // read the file
-      String contents = await file.readAsString();
+//   Future<String> readRecipes() async {
+//     try {
+//       final file = await _localFile;
+//       // read the file
+//       String contents = await file.readAsString();
 
-      // TODO: how to return/build list of recipes?
-      return contents;
-    } catch (e) {
-      return e.toString();
-    }
-  }
+//       // TODO: how to return/build list of recipes?
+//       return contents;
+//     } catch (e) {
+//       return e.toString();
+//     }
+//   }
 
-  Future<File> writeRecipes(String recipes) async {
-    final file = await _localFile;
+//   Future<File> writeRecipes(String recipes) async {
+//     final file = await _localFile;
 
-    // write the file
-    return file.writeAsString('$recipes');
-  }
-}
+//     // write the file
+//     return file.writeAsString('$recipes');
+//   }
+// }
+
+// enum RecipieTypes { Beer, Cider, Mead, Wine }
+List<String> recipeTypes = ['Beer', 'Cider', 'Mead', 'Wine'];
+
+String retrievedJson = """
+  [
+    {"type": 0, "name": "Pallet Jack", "description": "Brown Ale"},
+    {"type": 1, "name": "Grapefruit & Chill", "description": "Grapefruit Cider"},
+    {"type": 1, "name": "Bad Apple", "description": "Imperial Cider"},
+    {"type": 2, "name": "Short Mead", "description": "Just Mead"},
+    {"type": 2, "name": "Viking's Blood", "description": "Cherry Mead"},
+    {"type": 2, "name": "Strawberry Pepper", "description": "Weird Mead"},
+    {"type": 3, "name": "Prison Hooch", "description": "Sangria fr'm th' Terlit"}
+  ]
+  """;
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -49,12 +65,16 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  // final List<RecipieTypes> rTypes = RecipieTypes.values;
+  final List<String> rTypes = recipeTypes;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<dynamic> _recipes = jsonDecode(retrievedJson);
+
   int _counter = 0;
 
   void _incrementCounter() {
@@ -85,38 +105,36 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        // child: Column(
+        //   // Column is also a layout widget. It takes a list of children and
+        //   // arranges them vertically. By default, it sizes itself to fit its
+        //   // children horizontally, and tries to be as tall as its parent.
+        //   //
+        //   // Invoke "debug painting" (press "p" in the console, choose the
+        //   // "Toggle Debug Paint" action from the Flutter Inspector in Android
+        //   // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+        //   // to see the wireframe for each widget.
+        //   //
+        //   // Column has various properties to control how it sizes itself and
+        //   // how it positions its children. Here we use mainAxisAlignment to
+        //   // center the children vertically; the main axis here is the vertical
+        //   // axis because Columns are vertical (the cross axis would be
+        //   // horizontal).
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: <Widget>[],
+        child: ListView.builder(
+          itemCount: _recipes.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(
+                  '${_recipes[index]['name']} ' +
+                      '(${widget.rTypes[_recipes[index]['type']]})',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text('${_recipes[index]['description']}'),
+            );
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

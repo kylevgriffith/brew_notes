@@ -4,7 +4,7 @@
 // List of notes should be able to be changed at any time.
 class Attempt {
   DateTime start;
-  DateTime end;
+  DateTime? end;
   num rating;
   num abv;
   var temps = <DateTime, num>{};
@@ -12,7 +12,7 @@ class Attempt {
   var readings = <DateTime, num>{};
   var notes = <String>[];
 
-  Attempt(this.start, int duration);
+  Attempt(this.start, this.rating, this.abv);
 
   addTemp(DateTime time, num temp) {
     this.temps[time] = temp;
