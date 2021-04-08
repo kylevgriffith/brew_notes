@@ -41,6 +41,9 @@ class Recipe {
 
   void _addAttempt() {}
 
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'ingredients': ingredients.map((e) => e.toJson()), 'attempts': attempts.map((e) => e.toJson()};
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'ingredients': ingredients.map((e) => e.toJson()),
+        'attempts': attempts.map((e) => e.toJson())
+      };
 }
