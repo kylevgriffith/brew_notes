@@ -53,6 +53,38 @@ String retrievedJson = """
     {"type": 3, "name": "Prison Hooch", "description": "Sangria fr'm th' Terlit"}
   ]
   """;
+String bigObjJSON = """
+  [
+    {
+      "type": 0, 
+      "name": "Pallet Jack", 
+      "description": "Brown Ale",
+      "ingredients": [
+        {"name": "water", "amount": 1.0, "unit": "gallon"},
+        {"name": "hops", "amount": 0.5, "unit": "kg"},
+        {"name": "wheat", "amount": 0.75, "unit": "kg"}
+      ],
+      "attempts": [
+        {
+          "start_date": "4/1/21", 
+          "end_date": null, 
+          "original_grav": 1.050,
+          "final_grav": null,
+          "temperatures": 
+          [
+            {"temp_time": "4/2/21", "value": 20, "unit": "C"},
+            {"temp_time": "4/3/21", "value": 21, "unit": "C"},
+            {"temp_time": "4/7/21", "value": 19, "unit": "C"}
+          ],
+          "notes": 
+          [
+            {"note_date": "4/4/21", "note": "Some sediment has formed at the bottom. It's not bubbling as much as yesterday. Something smells like shit."}
+          ]
+        }
+      ]
+    }
+  ]
+  """;
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);

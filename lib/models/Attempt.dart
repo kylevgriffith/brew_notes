@@ -9,8 +9,8 @@ class Attempt {
   num? abv;
   var temps = <DateTime, num>{};
   // hydrometer readings
-  num? original_grav;
-  num? final_grav;
+  num? originalGrav;
+  num? finalGrav;
   var notes = <String>[];
 
   Attempt(this.start);
@@ -29,11 +29,8 @@ class Attempt {
     notes.add(result);
   }
 
-  Map<String, dynamic> toJson() => {
-    'start': start,
-    'end': end,
-    'temperatures': temps
-  }
+  Map<String, dynamic> toJson() =>
+      {'start': start, 'end': end, 'temperatures': temps};
 
   // calculate Alcohol By Volume from hydrometer reading
   // TODO: find actual formula, (temp is important)
