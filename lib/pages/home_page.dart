@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'recipe_page.dart';
+
 // class RecipeStorage {
 //   Future<String> get _localPath async {
 //     final directory = await getApplicationSupportDirectory();
@@ -120,8 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
         //   // center the children vertically; the main axis here is the vertical
         //   // axis because Columns are vertical (the cross axis would be
         //   // horizontal).
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[],
         child: ListView.builder(
           itemCount: _recipes.length,
           itemBuilder: (context, index) {
@@ -131,6 +131,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       '(${widget.rTypes[_recipes[index]['type']]})',
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('${_recipes[index]['description']}'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return RecipePage(recipe: "Me Secr't Formul'r!");
+                }));
+              },
             );
           },
         ),

@@ -21,6 +21,13 @@ class Recipe {
     this.ingredients = setIngredients();
   }
 
+  Recipe.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        ingredients = (json['ingredients'] as List)
+            .map((i) => Ingredient.fromJson(i))
+            .toList(),
+        attempts = (json['attempts']);
+
   List<Ingredient> setIngredients() {
     return [
       Ingredient('water', 1, 'gallon'),
@@ -33,4 +40,7 @@ class Recipe {
       {this.ingredients.add(Ingredient(name, amount, unit))};
 
   void _addAttempt() {}
+
+  Map<String, dynamic> toJson() =>
+      {'name': name, 'ingredients': ingredients.map((e) => e.toJson()), 'attempts': attempts.map((e) => e.toJson()};
 }

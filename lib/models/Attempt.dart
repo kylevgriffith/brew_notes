@@ -5,27 +5,34 @@
 class Attempt {
   DateTime start;
   DateTime? end;
-  num rating;
-  num abv;
+  // num rating;
+  num? abv;
   var temps = <DateTime, num>{};
   // hydrometer readings
-  var readings = <DateTime, num>{};
+  num? original_grav;
+  num? final_grav;
   var notes = <String>[];
 
-  Attempt(this.start, this.rating, this.abv);
+  Attempt(this.start);
 
   addTemp(DateTime time, num temp) {
     this.temps[time] = temp;
   }
 
-  addReading(DateTime time, num value, num temp) {
-    this.readings[time] = value;
-    this.abv = calcAbv(value, temp);
-  }
+  // addReading(DateTime time, num value, num temp) {
+  //   this.readings[time] = value;
+  //   this.abv = calcAbv(value, temp);
+  // }
 
   addNote(DateTime time, String note) {
     String result = 'Taken at $time\n$note';
     notes.add(result);
+  }
+
+  Map<String, dynamic> toJson() => {
+    'start': start,
+    'end': end,
+    'temperatures': temps
   }
 
   // calculate Alcohol By Volume from hydrometer reading

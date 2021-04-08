@@ -7,6 +7,13 @@ class Ingredient {
   String unit;
 
   Ingredient(this.name, this.amount, this.unit);
+  Ingredient.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        amount = json['amount'],
+        unit = json['unit'];
+
+  Map<String, dynamic> toJson() =>
+      {"name": name, "amount": amount, "unit": unit};
 
   @override
   String toString() => "$name $amount $unit";
