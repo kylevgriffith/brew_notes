@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/models.dart';
+import 'addEditIngredient.dart';
 import 'attempt_page.dart';
+import 'package:intl/intl.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
@@ -34,7 +36,9 @@ class _RecipePageState extends State<RecipePage> {
                     IconButton(
                         icon: const Icon(Icons.add),
                         // color: Colors.redAccent,
-                        onPressed: () {})
+                        onPressed: () {
+                          _addIngredient();
+                        })
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
@@ -46,6 +50,15 @@ class _RecipePageState extends State<RecipePage> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           title: Text(widget.recipe.ingredients[index]),
+                          onTap: () {
+                            _editIngredient(
+                                widget.recipe.ingredients[index], index);
+                          },
+                          onLongPress: () {
+                            setState(() {
+                              widget.recipe.ingredients.removeAt(index);
+                            });
+                          },
                         );
                       },
                       separatorBuilder: (context, index) {
@@ -65,8 +78,15 @@ class _RecipePageState extends State<RecipePage> {
                     ),
                     IconButton(
                         icon: const Icon(Icons.add),
-                        // color: Colors.redAccent,
-                        onPressed: () {})
+                        onPressed: () {
+                          setState(() {
+                            widget.recipe.attempts.add(Attempt(
+                                startDate: DateFormat.yMd('en_US')
+                                    .format(DateTime.now()),
+                                temperatures: <Temperature>[],
+                                notes: <Note>[]));
+                          });
+                        })
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
@@ -98,34 +118,37 @@ class _RecipePageState extends State<RecipePage> {
           ),
         ));
   }
+
+  // only use on existing ingredient list tiles
+  _editIngredient(String current, int index) async {
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                AddIngredientForm(currentIngredient: current)));
+    // do i need to check if this is a list? or can I just get a string/ not a null?
+    // if (result is List) {
+    if (result is String) {
+      setState(() {
+        widget.recipe.ingredients[index] = result;
+      });
+    }
+    // }
+  }
+
+  // add new ingredient to list.
+  _addIngredient() async {
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddIngredientForm()));
+    // do i need to check if this is a list? or can I just get a string/ not a null?
+    // if (result is List) {
+    if (result is String) {
+      setState(() {
+        widget.recipe.ingredients.add(result);
+      });
+    }
+    // }
+  }
 }
 
-
-
- 
-      
-      
-
-
-// ingredient card
-          // String ingredientStr = '';
-          // (widget.recipe.ingredients).forEach((element) {
-          //   ingredientStr += (element + '\n');
-          // });
- 
- 
-          // child: Column(
-          // children: [
-          //   Card(
-          //     child: Column(
-          //       children: [
-          //         Text('Ingredients:',
-          //             style:
-          //                 TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          //         Text(ingredientStr)
-          //       ],
-          //     ),
-          //   ),
-          // ],
-          // )
-        
+// TODO: Add new attempt, should just be named the date, (should I highlight ones that aren't done?)

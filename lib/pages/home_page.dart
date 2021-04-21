@@ -41,15 +41,15 @@ String bigObjJson = """
         "final_grav": null,
         "temperatures": 
         [
-          {"temp_time": "4/2/21", "value": 60},
-          {"temp_time": "4/3/21", "value": 61},
-          {"temp_time": "4/7/21", "value": 59}
+          {"temp_time": "4/2/2021", "value": 60},
+          {"temp_time": "4/3/2021", "value": 61},
+          {"temp_time": "4/7/2021", "value": 59}
         ],
         "notes": 
         [
-	      {"note_date": "4/1/21", "note": "First day brewing"},
-          {"note_date": "4/4/21", "note": "Some sediment has formed at the bottom. It's not bubbling as much as yesterday. Something smells like shit."},
-          {"note_date": "4/6/21", "note": "Oh god, why?"}
+	      {"note_date": "4/1/2021", "note": "First day brewing"},
+          {"note_date": "4/4/2021", "note": "Some sediment has formed at the bottom. It's not bubbling as much as yesterday. Something smells like shit."},
+          {"note_date": "4/6/2021", "note": "Oh god, why?"}
 	    ]
       }
     ]
@@ -119,4 +119,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  // add new recipe, flexible form to account for multiple ingredients?
+  _addRecipe() {}
 }

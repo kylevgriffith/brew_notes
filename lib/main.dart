@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,25 +20,6 @@ class MyApp extends StatelessWidget {
   //     {"type": 2, "name": "Viking's Blood", "description": "Cherry Mead"},
   //     {"type": 2, "name": "Strawberry Pepper", "description": "Weird Mead"},
   //     {"type": 3, "name": "Prison Hooch", "description": "Sangria fr'm th' Terlit"}
-  //   ]
-  //   """;
-  // String bigObjJson = """
-  //   [
-  //     {
-  //       "type": 0,
-  //       "name": "Pallet Jack",
-  //       "description": "Brown Ale",
-  //       "ingredients": [
-  //         "1 gal water",
-  //         "0.5 kg hops",
-  //         "0.75 kg wheat"
-  //       ],
-  //       "notes": [
-  //         "First day brewing.",
-  //         "Some sediment has formed at the bottom. It's not bubbling as much as yesterday. Something smells like shit.",
-  //         "Oh god, why?"
-  //       ]
-  //     }
   //   ]
   //   """;
 
