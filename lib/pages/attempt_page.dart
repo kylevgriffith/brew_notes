@@ -151,7 +151,7 @@ class _AttemptPageState extends State<AttemptPage> {
     final result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddTempForm()));
     if (result is List) {
-      if (result[0] is String && result[1] is double) {
+      if (result[0] is String && result[1] is int) {
         setState(() {
           widget.attempt.temperatures
               .add(Temperature(tempTime: result[0], value: result[1]));

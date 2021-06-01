@@ -126,28 +126,22 @@ class _RecipePageState extends State<RecipePage> {
         MaterialPageRoute(
             builder: (context) =>
                 AddIngredientForm(currentIngredient: current)));
-    // do i need to check if this is a list? or can I just get a string/ not a null?
-    // if (result is List) {
     if (result is String) {
       setState(() {
         widget.recipe.ingredients[index] = result;
       });
     }
-    // }
   }
 
   // add new ingredient to list.
   _addIngredient() async {
     final result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddIngredientForm()));
-    // do i need to check if this is a list? or can I just get a string/ not a null?
-    // if (result is List) {
     if (result is String) {
       setState(() {
         widget.recipe.ingredients.add(result);
       });
     }
-    // }
   }
 }
 

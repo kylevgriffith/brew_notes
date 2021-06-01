@@ -57,9 +57,7 @@ class _AddTempFormState extends State<AddTempForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   String now = DateFormat.yMd('en_US').format(DateTime.now());
-                  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //     content: Text(now + ' ' + tempFormController.text)));
-                  double temp = double.parse(tempFormController.text);
+                  int temp = int.parse(tempFormController.text);
                   Navigator.pop(context, [now, temp]);
                 }
               },
