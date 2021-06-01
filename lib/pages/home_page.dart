@@ -175,7 +175,6 @@ class _HomePageState extends State<HomePage> {
 
   // add new recipe, flexible form to account for multiple ingredients?
 
-  // Expected a value of type '(() => void)?', but got one of type '_Future<dynamic>'
   _addRecipe() async {
     final result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddRecipeForm()));
