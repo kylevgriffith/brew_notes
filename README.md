@@ -1,6 +1,6 @@
 # brew_notes
 
-A mobile app for recording homebrewing beverage data.
+A mobile app for recording homebrewed beverage data.
 
 ## Current State
 
