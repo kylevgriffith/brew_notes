@@ -2,15 +2,14 @@
 
 A mobile app for recording homebrewing beverage data.
 
-## Getting Started
+## Current State
 
-This project is a starting point for a Flutter application.
+- Works on Android devices and emulators (minimum SDK version 16, been using version 30). 
+- Information on setting up and running app on an Android emulator https://flutter.dev/docs/get-started/test-drive?tab=androidstudio
 
-A few resources to get you started if this is your first Flutter project:
+- Will run on web(Chrome) emulator, but saving will not work.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
+For help getting started with Flutter, view
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
