@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../models/models.dart';
 import 'addRecipe.dart';
 
+// used to initialize example recipe object
 String bigObjJson = """
 [
   {
@@ -74,14 +75,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // _recipes = recipeFromJson(read);
     widget.storage.loadData().then((List<Recipe> savedRecipes) => {
-          // setState(() {
-          //   _recipes = savedRecipes;
-          //   _loading = false;
-          // })
           print(recipeToJson(savedRecipes)),
-
           if (savedRecipes.isNotEmpty)
             {
               setState(() {
@@ -99,10 +94,6 @@ class _HomePageState extends State<HomePage> {
               })
             }
         });
-    // setState(() {
-    //   _recipes = recipeFromJson(bigObjJson);
-    //   _loading = false;
-    // });
   }
 
   @override
@@ -173,8 +164,7 @@ class _HomePageState extends State<HomePage> {
           );
   }
 
-  // add new recipe, flexible form to account for multiple ingredients?
-
+  // add new recipe
   _addRecipe() async {
     final result = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddRecipeForm()));
@@ -183,7 +173,7 @@ class _HomePageState extends State<HomePage> {
         // construct basic
         final newRecipe = Recipe(
             // TODO: find better way to make recipe ids.
-            id: _recipes.last.id + 1,
+            id: _recipes.last.id != null ? _recipes.last.id + 1 : 0,
             type: result[0],
             name: result[1],
             description: result[2],

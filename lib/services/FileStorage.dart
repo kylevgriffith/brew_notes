@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-// import 'dart:developer';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
@@ -26,11 +24,8 @@ class FileStorage {
       // Read the file
       String contents = await file.readAsString();
       print(contents);
-      if (contents != null) {
-        // parse json file if file was saved before
-        return recipeFromJson(contents);
-        // notifyListeners(); // this is not right for how I have this now
-      }
+      // parse json file if file was saved before
+      return recipeFromJson(contents);
     } on FileSystemException catch (_) {
       // the file did not exist before
     } catch (e) {

@@ -1,4 +1,6 @@
-// might not actually use this...
+// === Not Currently in Use ===
+// class to support use of provider with this project.
+
 import 'package:flutter/material.dart';
 import 'models.dart';
 
@@ -12,10 +14,6 @@ class RecipeCollectionModel extends ChangeNotifier {
   // needs to be able to connect w/ changes made within a Recipe, but might not
   // need to "know" what they are, just be able to hand them to the save file.
 
-  // TODO: how to handle loading in recipes from file?
-  // set recipes(String json) {}
-
-  // not sure I need this?
   List<Recipe> get recipes => _recipes;
 
   void add(Recipe newRecipe) {

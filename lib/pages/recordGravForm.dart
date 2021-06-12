@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class AddTempForm extends StatefulWidget {
+class RecordGravForm extends StatefulWidget {
+  const RecordGravForm({Key? key}) : super(key: key);
+
   @override
-  _AddTempFormState createState() => _AddTempFormState();
+  _RecordGravFormState createState() => _RecordGravFormState();
 }
 
-class _AddTempFormState extends State<AddTempForm> {
-  final tempFormController = TextEditingController();
+class _RecordGravFormState extends State<RecordGravForm> {
+  final gravFormController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -16,38 +18,39 @@ class _AddTempFormState extends State<AddTempForm> {
     super.initState();
 
     // Start listening for changes
-    tempFormController.addListener(_printLatestValue);
+    gravFormController.addListener(_printLatestValue);
   }
 
   // clean-up controller when the widget is removed from the widget tree.
   void dispose() {
-    tempFormController.dispose();
+    gravFormController.dispose();
     super.dispose();
   }
 
   // fn to print latest value
   _printLatestValue() {
-    print("Temp field: ${tempFormController.text}");
+    print("specific gravity field: ${gravFormController.text}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Temperature'),
+        title: Text('Enter a Specific Gravity'),
       ),
       body: Form(
         key: _formKey,
         child: Column(
           children: [
             TextFormField(
-              controller: tempFormController,
+              controller: gravFormController,
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r"\d?\.?\d{0,2}"))
+                FilteringTextInputFormatter.allow(RegExp(r"\d?\.?\d{0,3}"))
               ],
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter a temperature in Fahrenheit'),
+                  hintText:
+                      'Record measured specific gravity here (ex: 1.050)'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a number';
@@ -59,8 +62,8 @@ class _AddTempFormState extends State<AddTempForm> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   String now = DateFormat.yMd('en_US').format(DateTime.now());
-                  double temp = double.parse(tempFormController.text);
-                  Navigator.pop(context, [now, temp]);
+                  double grav = double.parse(gravFormController.text);
+                  Navigator.pop(context, [now, grav]);
                 }
               },
               child: Text('Submit'),

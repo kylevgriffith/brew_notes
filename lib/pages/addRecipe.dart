@@ -1,7 +1,5 @@
 import 'package:brew_notes/main.dart';
-import 'package:brew_notes/models/models.dart';
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
 
 class AddRecipeForm extends StatefulWidget {
   @override
@@ -14,8 +12,6 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
   final _formKey = GlobalKey<FormState>();
   int _radioValue1 = 0;
 
-  // late FocusNode myFocus;
-
   @override
   void initState() {
     super.initState();
@@ -25,9 +21,6 @@ class _AddRecipeFormState extends State<AddRecipeForm> {
     recipeFormController2.addListener(() {
       print('${recipeFormController2.text}');
     });
-
-    // init focus node
-    // myFocus = FocusNode();
   }
 
   // clean-up controller when the widget is removed from the widget tree.

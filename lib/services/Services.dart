@@ -1,13 +1,14 @@
 // possibly useful if I switch to having users store data online...
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:http/http.dart' as http;
 import '../models/models.dart';
 
-// === add to home_page.dart if we move to online storage ===
+// === NOT CURRENTLY IN USE, INSTEAD USING 'FileStorage.dart' MAYBE LATER ===
+
+// === add to home_page.dart if I move to online storage ===
 // @override
 // void initState() {
 //   super.initState();

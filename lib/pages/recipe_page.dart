@@ -1,8 +1,8 @@
+import 'package:brew_notes/pages/recordGravForm.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import 'addEditIngredient.dart';
 import 'attempt_page.dart';
-import 'package:intl/intl.dart';
 
 class RecipePage extends StatefulWidget {
   final Recipe recipe;
@@ -35,7 +35,6 @@ class _RecipePageState extends State<RecipePage> {
                     ),
                     IconButton(
                         icon: const Icon(Icons.add),
-                        // color: Colors.redAccent,
                         onPressed: () {
                           _addIngredient();
                         })
@@ -79,13 +78,7 @@ class _RecipePageState extends State<RecipePage> {
                     IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          setState(() {
-                            widget.recipe.attempts.add(Attempt(
-                                startDate: DateFormat.yMd('en_US')
-                                    .format(DateTime.now()),
-                                temperatures: <Temperature>[],
-                                notes: <Note>[]));
-                          });
+                          _newAttempt();
                         })
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +91,10 @@ class _RecipePageState extends State<RecipePage> {
                   itemCount: widget.recipe.attempts.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(widget.recipe.attempts[index].startDate),
+                      title: Text(widget.recipe.attempts[index].startDate +
+                          (widget.recipe.attempts[index].endDate != null
+                              ? (' - ' + widget.recipe.attempts[index].endDate!)
+                              : '')),
                       onTap: () {
                         Navigator.push(
                             context,
@@ -143,6 +139,19 @@ class _RecipePageState extends State<RecipePage> {
       });
     }
   }
-}
 
-// TODO: Add new attempt, should just be named the date, (should I highlight ones that aren't done?)
+  // create a new attempt after prompting user to measure initial specific gravity.
+  _newAttempt() async {
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RecordGravForm()));
+    if (result is List) {
+      setState(() {
+        widget.recipe.attempts.add(Attempt(
+            startDate: result[0],
+            originalGrav: result[1],
+            temperatures: <Temperature>[],
+            notes: <Note>[]));
+      });
+    }
+  }
+}

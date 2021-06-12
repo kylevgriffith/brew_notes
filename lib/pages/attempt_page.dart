@@ -2,7 +2,7 @@ import 'package:brew_notes/pages/addTemp.dart';
 import 'package:flutter/material.dart';
 import '../models/models.dart';
 import 'addNote.dart';
-// how to record datetime automatically?
+import 'recordGravForm.dart';
 
 class AttemptPage extends StatefulWidget {
   final String recipeName;
@@ -35,8 +35,21 @@ class _AttemptPageState extends State<AttemptPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    ElevatedButton(
+                      onPressed: () {
+                        try {
+                          _getFinalGrav(context);
+                        } catch (e) {
+                          print('Returned w/o setting final grav');
+                        }
+                      },
+                      child: Text(
+                        "Record Final Gravity",
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                    )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
                 color: Colors.lightBlueAccent,
               ),
@@ -54,9 +67,11 @@ class _AttemptPageState extends State<AttemptPage> {
                                 : '')),
                       ),
                       ListTile(
-                          // title: Text('Final Gravity: ' +
-                          //     widget.attempt.finalGrav!.toStringAsFixed(3)),
-                          ),
+                        title: Text('Final Gravity: ' +
+                            (widget.attempt.finalGrav != null
+                                ? widget.attempt.finalGrav!.toStringAsFixed(3)
+                                : '')),
+                      ),
                     ],
                   ),
                 ),
@@ -166,6 +181,17 @@ class _AttemptPageState extends State<AttemptPage> {
     if (result is List<String>) {
       setState(() {
         widget.attempt.notes.add(Note(noteDate: result[0], note: result[1]));
+      });
+    }
+  }
+
+  _getFinalGrav(BuildContext context) async {
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => RecordGravForm()));
+    if (result is List) {
+      setState(() {
+        widget.attempt.endDate = result[0];
+        widget.attempt.finalGrav = result[1];
       });
     }
   }
