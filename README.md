@@ -1,6 +1,6 @@
 # brew_notes
 
-A new Flutter project.
+A mobile app for recording homebrewing beverage data.
 
 ## Getting Started
 
