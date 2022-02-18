@@ -2,6 +2,8 @@
 
 A mobile app for recording homebrewed beverage data.
 
+![](/media/BN_attempt_details.jpg)
+
 ## Current State
 
 - Works on Android devices and emulators (minimum SDK version 16, been using version 30). 
