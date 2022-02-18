@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
         // construct basic
         final newRecipe = Recipe(
             // TODO: find better way to make recipe ids.
-            id: _recipes.last.id != null ? _recipes.last.id + 1 : 0,
+            id: _recipes.last.id = _recipes.last.id + 1,
             type: result[0],
             name: result[1],
             description: result[2],
