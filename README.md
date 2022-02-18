@@ -2,7 +2,7 @@
 
 A mobile app for recording homebrewed beverage data.
 
-![](/media/BN_attempt_details.jpg)
+<img src="./media/BN_attempt_details.jpg" width=200 height=430>
 
 ## Current State
 
